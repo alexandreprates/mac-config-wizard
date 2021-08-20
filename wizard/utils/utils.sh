@@ -1,41 +1,36 @@
-function execute_all_scripts_in_folder_if_yes {
+function confirm() {
     #######################################
-    # Executes all scripts in a folder path if the user input is 'yes'.
+    # Displays a message and waits for user decision
     #
-    # Globals:
-    #   $YES_REGEXP: comes from the config.sh file
-    # 
     # Arguments:
-    #   $1: user input as string
-    #   $2: relative folder path - example: ./folder_name (not a string)
+    #   $1: message (optional)
     #
     # Returns:
-    #   None
-    #######################################    
-    if [[ "$1" =~ $YES_REGEXP ]]  # compares user input $1 to the regexp
-    then
-        for file in $(ls $2); do  # uses relative folder path in $2
-            bash $2/$file
-        done
-    fi
+    #   0 (if yes)
+    #   1 (when no)
+    #######################################
+    read -r -p "${1:-Are you sure?} [Y/n] " response
+    case "$response" in
+        [yY])
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
 }
 
-function execute_cmd_if_yes {
+function execute_all_scripts_in_folder {
     #######################################
-    # Executes a cmd as string if the user input is 'yes'.
-    #
-    # Globals:
-    #   $YES_REGEXP: comes from the config.sh file
+    # Executes all scripts in a folder path.
     #
     # Arguments:
-    #   $1: user input as string
-    #   $2: cmds as SINGLE string - example: "cmd1 ; cmd2 ; cmd3"
+    #   $1: relative folder path - example: ./folder_name (not a string)
     #
     # Returns:
-    #   None
-    #######################################    
-    if [[ "$1" =~ $YES_REGEXP ]]  # compares user input $1 to the regexp
-    then
-        eval $2
-    fi
+    #   0 (success)
+    #######################################
+    for file in $1/*; do  # uses relative folder path in $1
+        bash $file
+    done
 }
