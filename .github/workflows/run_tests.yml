@@ -11,4 +11,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run tests
-      run: docker run -it --rm -v `pwd`:/`basename $(pwd)` -w /`basename $(pwd)` bash:latest ./tests/tesht/tesht.sh './tests/utils/*.tsh'
+      run: docker run --rm -v `pwd`:/`basename $(pwd)` -w /`basename $(pwd)` bash:latest ./tests/tesht/tesht.sh './tests/**/*.tsh'
