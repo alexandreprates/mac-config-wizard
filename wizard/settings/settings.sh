@@ -1,5 +1,5 @@
-# yes definition for user input
-YES_REGEXP="^([yY][eE][sS]|[yY])$"  # for other shell modules
+# Define package manager (with args)
+PACKAGE_MANAGER="brew cask install"
 
 # project structure
 PRE_REQUISITES_FOLDER="./wizard/installs/pre_requisites"

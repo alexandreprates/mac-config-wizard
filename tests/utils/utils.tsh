@@ -24,3 +24,8 @@ assert_stdout "message"
 test execute_all_scripts_in_folder tests/samples
 assert_success
 assert_stdout "script a\nscript b"
+
+PACKAGE_MANAGER="echo"
+test install_package google-chrome
+assert_success
+assert_stdout "Installing google-chrome...\ngoogle-chrome"

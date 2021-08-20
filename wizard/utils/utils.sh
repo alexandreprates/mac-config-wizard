@@ -34,3 +34,20 @@ function execute_all_scripts_in_folder {
         bash $file
     done
 }
+
+function install_package() {
+    #######################################
+    # Install an app with the selected package manager
+    #
+    # Globals:
+    #   $PACKAGE_MANAGER: comes from the settings.sh file
+    #
+    # Arguments:
+    #   $1: package to install
+    #
+    # Returns:
+    #   0 (success)
+    #######################################
+    echo "Installing $1..."
+    $PACKAGE_MANAGER $1
+}
